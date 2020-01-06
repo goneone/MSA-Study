@@ -1,5 +1,7 @@
-package com.rest.oauth2.user;
+package com.rest.oauth2.web;
 
+import com.rest.oauth2.user.User;
+import com.rest.oauth2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,4 +24,8 @@ public class UserController {
         return userService.save(user);
     }
 
+    @GetMapping("/registerTest")
+    public String registerTest() {
+        return "registerTest";
+    }
 }

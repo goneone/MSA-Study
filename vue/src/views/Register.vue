@@ -19,7 +19,7 @@
         <input type="password" class="form-control" name="password" />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" color="default-color">Sign Up</button>
+        <button class="btn btn-primary btn-block" @click="registerTest()" color="default-color">Sign Up</button>
       </div>
     </form>
   </div>
@@ -30,26 +30,8 @@
 export default {
   name: 'register',
   methods: {
-    handleRegister() {
-      this.message = ''
-      this.submitted = true
-      this.$validator.validate().then(valid => {
-        if (valid) {
-          this.$store.dispatch('auth/register', this.user).then(
-            data => {
-              this.message = data.message
-              this.successful = true
-            },
-            error => {
-              this.message = error.message
-              this.successful = false
-            }
-          ).then(
-            this.$router.push('/')
-          )
-        }
-      })
-    }
+      console.lo("abc")
+      console.lo("abcd")
   }
 }
 </script>
