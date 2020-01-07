@@ -29,4 +29,4 @@ function requestLogin(member) {
     return axios(requestData);
 }
 
-export {requestJoinMember, requestLogin, setAccessTokenInHeader}
+export {requestJoinMember, requestLogin, setAccessTokenInHeader, registerTest}

@@ -24,8 +24,4 @@ public class UserController {
         return userService.save(user);
     }
 
-    @GetMapping("/registerTest")
-    public String registerTest() {
-        return "registerTest";
-    }
 }

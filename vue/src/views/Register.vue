@@ -19,7 +19,7 @@
         <input type="password" class="form-control" name="password" />
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" @click="registerTest()" color="default-color">Sign Up</button>
+        <button v-on:click="getData" class="btn btn-primary btn-block" color="default-color">Sign Up</button>
       </div>
     </form>
   </div>
@@ -27,11 +27,20 @@
 </template>
 
 <script>
+import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위해 import한다
+
+
 export default {
   name: 'register',
   methods: {
-      console.lo("abc")
-      console.lo("abcd")
+    getData: function(){
+      alert("시작합니다")
+      axios.get('http://localhost:8081/registerTest')
+      .then(function(response){
+          alert("데이터 받아옵니다")
+          alert(response)
+      });
+    }
   }
 }
 </script>

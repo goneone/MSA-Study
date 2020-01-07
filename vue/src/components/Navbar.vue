@@ -5,9 +5,9 @@
     </mdb-navbar-brand>
     <mdb-navbar-toggler>
       <mdb-navbar-nav>
-        <mdb-nav-item href="#" active to="/index">Home1</mdb-nav-item>
-        <mdb-nav-item href="#" to="/register">Sign up1</mdb-nav-item>
-        <mdb-nav-item href="#" :class="{active : this.$route.name === 'login'}" to="/login">Sign in1</mdb-nav-item>
+        <mdb-nav-item href="#" active to="/index">Home</mdb-nav-item>
+        <mdb-nav-item href="#" to="/register">Sign up</mdb-nav-item>
+        <mdb-nav-item href="#" :class="{active : this.$route.name === 'login'}" to="/login">Sign in</mdb-nav-item>
       </mdb-navbar-nav>
       <form>
         <mdb-input type="text" class="text-white" placeholder="Search" aria-label="Search" label navInput waves waves-fixed/>
