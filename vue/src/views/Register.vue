@@ -19,7 +19,7 @@
         <input type="password" class="form-control" name="password" />
       </div>
       <div class="form-group">
-        <button v-on:click="getData" class="btn btn-primary btn-block" color="default-color">Sign Up</button>
+        <button v-on:click="registerTest" class="btn btn-primary btn-block" color="default-color">Sign Up</button>
       </div>
     </form>
   </div>
@@ -31,16 +31,41 @@ import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위�
 
 
 export default {
-  name: 'register',
+  mounted() {
+    console.log("Component mounted")
+  },
+  name: 'app',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: ''
+    };
+  },
   methods: {
-    getData: function(){
+    // getData: function(){
+    //   alert("시작합니다")
+    //   axios.get('http://localhost:8081/registerTest')
+    //   .then(function(response){
+    //       alert("데이터 받아옵니다")
+    //       alert(response)
+    //   });
+    // }
+    registerTest : function() {
       alert("시작합니다")
-      axios.get('http://localhost:8081/registerTest')
-      .then(function(response){
-          alert("데이터 받아옵니다")
-          alert(response)
-      });
-    }
+      axios.post('/api/registerTest',
+        { username: this.username,
+          email:this.email,
+          password:this.password
+        })
+        .then(response => {
+          console.warn(response)
+          this.result = response.data
+          this.no = response.data.no
+      }).catch((ex) => {
+          console.warn("ERROR!!!!! : ",ex)
+      })
+  },
   }
 }
 </script>
