@@ -1,4 +1,4 @@
-package com.rest.oauth2.user;
+package com.rest.oauth2.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

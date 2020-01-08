@@ -1,6 +1,6 @@
 package com.rest.oauth2.web;
 
-import com.rest.oauth2.user.User;
+import com.rest.oauth2.domain.user.User;
 import com.rest.oauth2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

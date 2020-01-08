@@ -1,7 +1,7 @@
 package com.rest.oauth2.service;
 
-import com.rest.oauth2.user.User;
-import com.rest.oauth2.user.UserRepository;
+import com.rest.oauth2.domain.user.User;
+import com.rest.oauth2.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

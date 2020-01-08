@@ -1,12 +1,21 @@
 server:
   port: 8081
 spring:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3307/springwebservice?serverTimezone=UTC&useSSL=false
+      username: root
+      password: root
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: true
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties.hibernate.hbm2ddl.auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hbm2ddl:
+          auto: update
     showSql: true

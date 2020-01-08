@@ -1,6 +1,5 @@
-package com.rest.oauth2.user;
+package com.rest.oauth2.domain.user;
 
-import com.sun.javafx.beans.IDProperty;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -19,5 +18,6 @@ public class User {
 
     private String password;
 
+    private String email;
 
 }

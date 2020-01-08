@@ -37,7 +37,7 @@ export default {
   name: 'app',
   data() {
     return {
-      name: '',
+      username: '',
       email: '',
       password: ''
     };
