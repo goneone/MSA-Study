@@ -33,6 +33,11 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public User register (User user) {
+        return userRepository.save(user);
+    }
+
     @PostConstruct
     public void init(){
         User autumn = userRepository.findByUsername("autumn");

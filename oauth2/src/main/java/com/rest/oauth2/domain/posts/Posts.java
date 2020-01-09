@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+//@NoArgsConstructor 어노테이션은 파라미터가 없는 기본 생성자를 생성해준다.
 @Getter
 @NoArgsConstructor
 @Entity

@@ -39,23 +39,6 @@ export default {
     };
   },
   methods: {
-  //   registerTest2(e) : function() {
-  //     e.preventDefault();
-  //     alert("시작합니다")
-  //     axios.post('http://localhost:8081/registerTest',
-  //       { title: this.title,
-  //         author:this.author,
-  //         content:this.content
-  //       })
-  //       .then(response => {
-  //         console.warn(response)
-  //         this.result = response.data
-  //         this.no = response.data.no
-  //     }).catch((ex) => {
-  //         console.warn("ERROR!!!!! : ",ex)
-  //     })
-  // },
-
     registerTest2(e) {
       e.preventDefault();
       alert("시작합니다")

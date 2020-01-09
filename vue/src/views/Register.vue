@@ -6,17 +6,17 @@
 
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" />
+        <input type="text" class="form-control" name="username" v-model="username" />
 
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" />
+        <input type="email" class="form-control" name="email" v-model="email" />
 
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" />
+        <input type="password" class="form-control" name="password" v-model="password"/>
       </div>
       <div class="form-group">
         <button v-on:click="registerTest" class="btn btn-primary btn-block" color="default-color">Sign Up</button>
@@ -51,12 +51,13 @@ export default {
     //       alert(response)
     //   });
     // }
-    registerTest : function() {
-      alert("시작합니다")
-      axios.post('/api/registerTest',
-        { username: this.username,
-          email:this.email,
-          password:this.password
+    registerTest(e) {
+      alert("회원가입")
+      e.preventDefault(); //현재 이벤트의 기본 동작을 중단한다.
+      axios.post('http://localhost:8081/register',
+        { username  : this.username,
+          email     : this.email,
+          password  : this.password
         })
         .then(response => {
           console.warn(response)
@@ -65,7 +66,7 @@ export default {
       }).catch((ex) => {
           console.warn("ERROR!!!!! : ",ex)
       })
-  },
+    },
   }
 }
 </script>
