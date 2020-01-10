@@ -50,8 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anonymous()
                     .disable()
                 .authorizeRequests()
-                    .antMatchers("/api-docs/**")
-                .permitAll();
+                    .antMatchers("/api-docs/**").access("ROLE_USER")
+                    .antMatchers("/board").access("ROLE_USER")
+                    .antMatchers("/register").authenticated();
     }
 }
 
