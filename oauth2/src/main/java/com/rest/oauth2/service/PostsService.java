@@ -1,6 +1,6 @@
 package com.rest.oauth2.service;
 
-import com.rest.oauth2.domain.posts.PostsRepository;
+import com.rest.oauth2.domain.PostsRepository;
 import com.rest.oauth2.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

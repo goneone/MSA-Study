@@ -2,6 +2,8 @@ package com.rest.oauth2.service;
 
 import com.rest.oauth2.domain.user.User;
 import com.rest.oauth2.domain.user.UserRepository;
+import com.rest.oauth2.web.dto.UserRegisterRequestDto;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -37,7 +40,7 @@ public class UserService implements UserDetailsService {
     public User register (User user) {
         return userRepository.save(user);
     }
-
+/*
     @PostConstruct
     public void init(){
         User autumn = userRepository.findByUsername("autumn");
@@ -46,8 +49,20 @@ public class UserService implements UserDetailsService {
             user.setUsername("autumn");
             user.setPassword("pass");
             System.out.println(this.save(user));
+
         }
-    }
+    }*/
+
+    /*@PostConstruct
+    public void init(){
+        User autumn = userRepository.findByUsername("autumn");
+        if(autumn == null){
+            User user = new User();
+            user.setUsername("autumn");
+            user.setPassword("pass");
+            System.out.println(this.save(user));
+        }
+    }*/
     @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities());

@@ -1,6 +1,6 @@
 package com.rest.oauth2.web.dto;
 
-import com.rest.oauth2.domain.posts.Posts;
+import com.rest.oauth2.domain.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
