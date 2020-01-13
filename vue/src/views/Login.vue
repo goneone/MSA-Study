@@ -30,6 +30,22 @@
 <script>
 export default {
   name: 'login',
+  loginRequest(member) {
+    let form = ne FormData();
+    form.append('email', member.email);
+    form.append('password', member.password);
+    form.append("grant_type", "password");
+    const requestData = {
+      url: `localhost:8081/oauth/token`,
+      method: "POST"
+      auth: {
+        email: process.env.VUE_APP_CLIENTID,
+        password: process.env.VUE_APP_CLIENTSECRET,
+      },
+      data:form
+    }
+    return axios(requestData);
+  }
 }
 </script>
 

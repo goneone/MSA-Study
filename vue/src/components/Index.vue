@@ -1,26 +1,40 @@
 <template>
-    <div id = "app">
-       {{ message }}
-   </div>
+  <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+            <tr>
+
+                <th>제목</th>
+                <th>작성자</th>
+                <th>최종수정일</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr v-for="postData in datas" :key="postData.id">
+                <td>{{postData.title}}</td>
+                <td>{{postData.author}}</td>
+                <td>{{postData.modifiedDate}}</td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
   import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위해 import한다
   export default {
+    //el : '#app2',
     mounted: function(){
-        const baseURI = 'http://localhost:8081/';
+        const baseURI = 'http://localhost:8081';
         axios.get(`${baseURI}/getPostList`)
         .then((result) => {
         console.log(result)
         this.datas = result.data
+        console.log(this.datas)
         }
       )},
     data() {
       return {
-        username: '',
-        email: '',
-        password: '',
-        message: '에라이'
+        datas: [this.datas]
       };
     },
   };

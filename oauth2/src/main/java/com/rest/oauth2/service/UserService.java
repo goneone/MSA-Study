@@ -1,5 +1,6 @@
 package com.rest.oauth2.service;
 
+import com.rest.oauth2.domain.user.Role;
 import com.rest.oauth2.domain.user.User;
 import com.rest.oauth2.domain.user.UserRepository;
 import com.rest.oauth2.web.dto.UserRegisterRequestDto;
@@ -40,7 +41,6 @@ public class UserService implements UserDetailsService {
     public User register (User user) {
         return userRepository.save(user);
     }
-/*
     @PostConstruct
     public void init(){
         User autumn = userRepository.findByUsername("autumn");
@@ -51,17 +51,18 @@ public class UserService implements UserDetailsService {
             System.out.println(this.save(user));
 
         }
-    }*/
-
-    /*@PostConstruct
+    }
+   /* @PostConstruct
     public void init(){
-        User autumn = userRepository.findByUsername("autumn");
-        if(autumn == null){
-            User user = new User();
-            user.setUsername("autumn");
-            user.setPassword("pass");
-            System.out.println(this.save(user));
-        }
+        *//*User autumn = userRepository.findByUsername("autumn");
+        if(autumn == null){*//*
+            User user = User.builder()
+                    .username("autumn")
+                    .password("pass")
+                    .email("test@naver.com")
+                    .role(Role.USER)
+                    .build();
+        //}
     }*/
     @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);

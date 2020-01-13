@@ -2,6 +2,8 @@
 
 <div class="col-md-12">
     <div class="col-md-4">
+        <br>
+        <br>
         <form>
             <div class="form-group">
                 <label for="title">제목</label>

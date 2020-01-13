@@ -11,9 +11,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+import javax.sql.DataSource;
+
 @EnableAuthorizationServer
 @Configuration
 public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+    @Autowired
+    private DataSource datasource;
     @Autowired
     private TokenStore tokenStore;
 
@@ -33,6 +37,9 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read", "write") .accessTokenValiditySeconds(60*60)
                 .refreshTokenValiditySeconds(6*60*60) .autoApprove(true);
     }
+   /* @Override public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(datasource) ;
+    }*/
 
     @Override public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore)
