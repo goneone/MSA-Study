@@ -52,18 +52,7 @@ public class UserService implements UserDetailsService {
 
         }
     }
-   /* @PostConstruct
-    public void init(){
-        *//*User autumn = userRepository.findByUsername("autumn");
-        if(autumn == null){*//*
-            User user = User.builder()
-                    .username("autumn")
-                    .password("pass")
-                    .email("test@naver.com")
-                    .role(Role.USER)
-                    .build();
-        //}
-    }*/
+
     @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities());
