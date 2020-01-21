@@ -5,6 +5,7 @@ import Index from "../components/Index"
 import Register from "../views/Register"
 import Login from "../views/Login"
 import Example from "../views/Example"
+import Admin from "../views/Admin"
 
 Vue.use(VueRouter);
 const router =  new VueRouter({
@@ -34,6 +35,11 @@ const router =  new VueRouter({
             name: 'example',
             component: Example
         },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: Admin
+        }
     ]
 });
 

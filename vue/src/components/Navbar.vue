@@ -9,6 +9,7 @@
         <mdb-nav-item href="#" to="/register">Sign up</mdb-nav-item>
         <mdb-nav-item href="#" :class="{active : this.$route.name === 'login'}" to="/login">Sign in</mdb-nav-item>
         <mdb-nav-item href="#" to="/example">Board</mdb-nav-item>
+        <mdb-nav-item href="#" to="/admin">관리자 전용</mdb-nav-item>
       </mdb-navbar-nav>
       <form>
         <mdb-input type="text" class="text-white" placeholder="Search" aria-label="Search" label navInput waves waves-fixed/>

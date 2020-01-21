@@ -4,19 +4,19 @@
     <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
     <form name="form">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" />
+        <label for="username">email</label>
+        <input type="text" class="form-control" name="username" v-model="username"/>
 
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" />
+        <input type="password" class="form-control" name="password" v-model="password"/>
 
       </div>
       <div class="form-group">
-        <button class="btn btn-primary btn-block" :disabled="loading">
+        <button v-on:click="requestLogin" class="btn btn-primary btn-block" :disabled="loading">
           <span class="spinner-border spinner-border-sm" v-show="loading"></span>
-          <span>Login</span>
+          <span>Sign In</span>
         </button>
       </div>
       <div class="form-group">
@@ -28,23 +28,55 @@
 </template>
 
 <script>
+import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위해 import한다
+
 export default {
   name: 'login',
-  loginRequest(member) {
-    let form = ne FormData();
-    form.append('email', member.email);
-    form.append('password', member.password);
-    form.append("grant_type", "password");
-    const requestData = {
-      url: `localhost:8081/oauth/token`,
-      method: "POST"
-      auth: {
-        email: process.env.VUE_APP_CLIENTID,
-        password: process.env.VUE_APP_CLIENTSECRET,
-      },
-      data:form
+  data() {
+    return {
+      username:'',
+      email: '',
+      password: ''
     }
-    return axios(requestData);
+  },
+  methods: {
+    requestLogin(e) {
+      e.preventDefault();
+      let form = new FormData();
+      form.append('username', this.username);
+      form.append('password', this.password);
+
+      axios.post('http://localhost:8081/login', form)
+      .then(response => {
+        console.warn(response)
+      }).catch((ex) => {
+        console.warn("ERROR!!!!! : ",ex)
+      })
+
+      // axios.post('http://localhost:8081/login',
+      // { username : this.username,
+      //   email : this.email,
+      //   password : this.password
+      // })
+      // .then(response => {
+      //   console.warn(response)
+      // }).catch((ex) => {
+      //   console.warn("ERROR!!!!! : ",ex)
+      // })
+
+
+
+      // let form = new FormData();
+      // form.append('username', member.email);
+      // form.append('password', member.password);
+      // form.append("grant_type", "password");
+      // const requestData = {
+      //   url: `localhost:8081/login`,
+      //   method: "POST",
+      //   data:form
+      // }
+      // return axios(requestData);
+    }
   }
 }
 </script>

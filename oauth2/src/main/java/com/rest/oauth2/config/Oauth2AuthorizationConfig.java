@@ -1,3 +1,4 @@
+/*
 package com.rest.oauth2.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,6 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read", "write") .accessTokenValiditySeconds(60*60)
                 .refreshTokenValiditySeconds(6*60*60) .autoApprove(true);
     }
-   /* @Override public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(datasource) ;
-    }*/
 
     @Override public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore)
@@ -48,3 +46,4 @@ public class Oauth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     }
 }
 
+*/

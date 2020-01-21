@@ -1,14 +1,17 @@
 package com.rest.oauth2.web;
 
-import com.rest.oauth2.domain.user.User;
-import com.rest.oauth2.service.UserService;
-import com.rest.oauth2.web.dto.UserRegisterRequestDto;
+import com.rest.oauth2.domain.user.Account;
+import com.rest.oauth2.domain.user.Role;
+import com.rest.oauth2.service.AccountService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
 
 
 //@RequiredArgsConstructor 초기화 되지 않은 final 필드와 @NonNull 어노테이션이 붙은 필드에 대한 생성자 생성
@@ -22,24 +25,29 @@ import java.util.List;
 //public String abc(Model model) { 이런식으로 되어있을시..~~!!
 @AllArgsConstructor
 @RestController
-public class UserController {
+public class AccountController {
 
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
     @GetMapping("/user")
-    public List<User> listUser() {
-        return userService.findAll();
-    }
-
-    @PostMapping("/user")
-    public User create(@RequestBody User user) {
-        return userService.save(user);
+    public List<Account> listUser() {
+        return accountService.findAll();
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public Account register(@RequestBody Account account) {
+        account.setRole(Role.USER);
+        return accountService.save(account);
     }
 
+   /* @GetMapping("/admin")
+    public String admin(Model model) {
+        return "admin";
+    }
+*/
+    /*@GetMapping("/login")
+    public String login() {
+        return "login";
+    }*/
 }

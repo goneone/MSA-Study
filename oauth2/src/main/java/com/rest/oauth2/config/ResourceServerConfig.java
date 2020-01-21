@@ -1,3 +1,4 @@
+/*
 package com.rest.oauth2.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -20,3 +21,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 }
+*/
