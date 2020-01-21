@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
      .formLogin()
         .loginPage("/login") //get 요청은 form을 보여주고 post요청은 usernamepasswordauthenticationfilter가 처리함.
-        .defaultSuccessUrl("/admin", true)
+        //.defaultSuccessUrl("/admin", true)
 
         .permitAll()
         .and()

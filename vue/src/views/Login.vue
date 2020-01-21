@@ -49,6 +49,9 @@ export default {
       axios.post('http://localhost:8081/login', form)
       .then(response => {
         console.warn(response)
+        if(response) {
+          this.$router.push('/');
+        }
       }).catch((ex) => {
         console.warn("ERROR!!!!! : ",ex)
       })
