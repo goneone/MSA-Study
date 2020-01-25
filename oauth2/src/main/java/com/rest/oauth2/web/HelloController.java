@@ -1,6 +1,5 @@
 package com.rest.oauth2.web;
 
-import com.rest.oauth2.web.dto.UserRegisterRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

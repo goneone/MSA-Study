@@ -1,5 +1,7 @@
 package com.rest.oauth2.domain;
 
+import com.rest.oauth2.domain.posts.Posts;
+import com.rest.oauth2.domain.posts.PostsRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

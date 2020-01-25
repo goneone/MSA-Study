@@ -1,8 +1,8 @@
 package com.rest.oauth2.web;
 
 import com.rest.oauth2.service.PostsService;
-import com.rest.oauth2.web.dto.PostsListResponseDto;
-import com.rest.oauth2.web.dto.PostsSaveRequestDto;
+import com.rest.oauth2.web.dto.post.PostsListResponseDto;
+import com.rest.oauth2.web.dto.post.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
