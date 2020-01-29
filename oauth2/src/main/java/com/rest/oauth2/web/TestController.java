@@ -49,3 +49,21 @@ public class TestController {
 
 
 }
+
+
+
+////@Controller
+////@Controller와 @RestController의 차이점
+////@Controller는 단순히 페이지를 이동시키는 방법으로 보통 Model을 설정하여 해당 페이지에 보내게 되고 VIew에서는 JSP 페이지와 JSTL과 함께 쓰인다.
+////@RestController는 return 되는 값을 페이지에 보여줍니다. POST 방식이나 PUT 방식을 쓰게 된다면 일반적인 브라우저에서는 볼 수 없다
+////RESTful 접속 도구를 설치하여 볼 수 있다
+//@RestController //이건 string 값임.
+
+////@RequiredArgsConstructor 초기화 되지 않은 final 필드와 @NonNull 어노테이션이 붙은 필드에 대한 생성자 생성
+////@AllArgsConstructor 모든 필드에 대한 생성자 생성.
+////@RequestMapping("/register")  //@RequestMapping("/users")
+////@RequestMapping("/register") 로 주면ㅉ
+////화면에서 localhost:8080/register/abc 로 호출하면
+////해당컨트롤러를타고 해당컨트롤러의 abc 메소드 탐
+////해당 메소드에도 @RequestMapping("/abc")
+////public String abc(Model model) { 이런식으로 되어있을시..~~!!

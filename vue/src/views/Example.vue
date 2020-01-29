@@ -40,6 +40,7 @@ export default {
       content: '',
     };
   },
+  //ha...
   methods: {
     registerTest2(e) {
       e.preventDefault();
