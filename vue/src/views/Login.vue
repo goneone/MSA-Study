@@ -1,87 +1,108 @@
 <template>
-<div class="col-md-12">
-  <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-    <form name="form">
-      <div class="form-group">
-        <label for="username">email</label>
-        <input type="text" class="form-control" name="username" v-model="username"/>
-
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" v-model="password"/>
-
-      </div>
-      <div class="form-group">
-        <button v-on:click="requestLogin" class="btn btn-primary btn-block" :disabled="loading">
-          <span class="spinner-border spinner-border-sm" v-show="loading"></span>
-          <span>Sign In</span>
-        </button>
-      </div>
-      <div class="form-group">
-        <div class="alert alert-danger" role="alert" v-if="message">{{message}}</div>
-      </div>
-    </form>
+  <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form name="form" @submit.prevent="handleLogin">
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            v-model="user.email"
+            v-validate="'required'"
+            type="text"
+            class="form-control"
+            name="email"
+          />
+          <div
+            v-if="errors.has('email')"
+            class="alert alert-danger"
+            role="alert"
+          >email is required!</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            v-model="user.password"
+            v-validate="'required'"
+            type="password"
+            class="form-control"
+            name="password"
+          />
+          <div
+            v-if="errors.has('password')"
+            class="alert alert-danger"
+            role="alert"
+          >Password is required!</div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" :disabled="loading">
+            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+            <span>Login</span>
+          </button>
+        </div>
+        <div class="form-group">
+          <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위해 import한다
+import User from '../models/user';
 
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
-      username:'',
-      email: '',
-      password: ''
+      user: new User('', ''),
+      loading: false,
+      message: ''
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push('/profile');
     }
   },
   methods: {
-    requestLogin(e) {
-      e.preventDefault();
-      let form = new FormData();
-      form.append('username', this.username);
-      form.append('password', this.password);
-
-      axios.post('http://localhost:8081/login', form)
-      .then(response => {
-        console.warn(response)
-        if(response) {
-          this.$router.push('/');
+    handleLogin() {
+      this.loading = true;
+      this.$validator.validateAll().then(isValid => {
+        //폼에 적용되어 있는 모든 입력폼에 대한 검증을 하고자 할 때 validateAll() 메소드를 사용한다
+        //validateAll()의 리턴값은 boolean형으로 true 혹은 false를 돌려받는다.
+        if (!isValid) {
+          this.loading = false;
+          return;
         }
-      }).catch((ex) => {
-        console.warn("ERROR!!!!! : ",ex)
-      })
 
-      // axios.post('http://localhost:8081/login',
-      // { username : this.username,
-      //   email : this.email,
-      //   password : this.password
-      // })
-      // .then(response => {
-      //   console.warn(response)
-      // }).catch((ex) => {
-      //   console.warn("ERROR!!!!! : ",ex)
-      // })
-
-
-
-      // let form = new FormData();
-      // form.append('username', member.email);
-      // form.append('password', member.password);
-      // form.append("grant_type", "password");
-      // const requestData = {
-      //   url: `localhost:8081/login`,
-      //   method: "POST",
-      //   data:form
-      // }
-      // return axios(requestData);
+        if (this.user.email && this.user.password) {
+          this.$store.dispatch('auth/login', this.user).then(
+            //actions을 호출할 때는 dispatch를 사용함.
+            () => {
+              this.$router.push('/profile');
+            },
+            error => {
+              this.loading = false;
+              this.message =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+            }
+          );
+        }
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

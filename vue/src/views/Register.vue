@@ -1,74 +1,117 @@
 <template>
-<div class="col-md-12">
-  <div class="card card-container">
-    <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-    <form name="form">
+  <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form name="form" @submit.prevent="handleRegister">
+        <div v-if="!successful">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              v-model="user.username"
+              v-validate="'required|min:3|max:20'"
+              type="text"
+              class="form-control"
+              name="username"
+            />
+            <div
+              v-if="submitted && errors.has('username')"
+              class="alert-danger"
+            >{{errors.first('username')}}</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              v-model="user.email"
+              v-validate="'required|email|max:50'"
+              type="email"
+              class="form-control"
+              name="email"
+            />
+            <div
+              v-if="submitted && errors.has('email')"
+              class="alert-danger"
+            >{{errors.first('email')}}</div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              v-model="user.password"
+              v-validate="'required|min:6|max:40'"
+              type="password"
+              class="form-control"
+              name="password"
+            />
+            <div
+              v-if="submitted && errors.has('password')"
+              class="alert-danger"
+            >{{errors.first('password')}}</div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">Sign Up</button>
+          </div>
+        </div>
+      </form>
 
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" name="username" v-model="username" />
-
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" v-model="email" />
-
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" v-model="password"/>
-      </div>
-      <div class="form-group">
-        <button v-on:click="registerTest" class="btn btn-primary btn-block" color="default-color">Sign Up</button>
-      </div>
-    </form>
+      <div
+        v-if="message"
+        class="alert"
+        :class="successful ? 'alert-success' : 'alert-danger'"
+      >{{message}}</div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-import axios from 'axios' // 아까 받은 axios 패키지를 사용하기 위해 import한다
-
+import User from '../models/user';
 
 export default {
-  mounted() {
-    console.log("Component mounted")
-  },
-  name: 'app',
+  name: 'Register',
   data() {
     return {
-      username: '',
-      email: '',
-      password: ''
+      user: new User('', '', ''),
+      submitted: false,
+      successful: false,
+      message: ''
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  mounted() {
+    if (this.loggedIn) {
+      this.$router.push('/profile');
+    }
+  },
   methods: {
-    // getData: function(){
-    //   alert("시작합니다")
-    //   axios.get('http://localhost:8081/registerTest')
-    //   .then(function(response){
-    //       alert("데이터 받아옵니다")
-    //       alert(response)
-    //   });
-    // }
-    registerTest(e) {
-      alert("회원가입")
-      e.preventDefault(); //현재 이벤트의 기본 동작을 중단한다.
-      axios.post('http://localhost:8081/register',
-        { username  : this.username,
-          email     : this.email,
-          password  : this.password
-        })
-        .then(response => {
-          console.warn(response)
-          this.result = response.data
-          this.no = response.data.no
-      }).catch((ex) => {
-          console.warn("ERROR!!!!! : ",ex)
-      })
-    },
+    handleRegister() {
+      this.message = '';
+      this.submitted = true;
+      this.$validator.validate().then(isValid => {
+        if (isValid) {
+          this.$store.dispatch('auth/register', this.user).then(
+            data => {
+              this.message = data.message;
+              this.successful = true;
+            },
+            error => {
+              this.message =
+                (error.response && error.response.data) ||
+                error.message ||
+                error.toString();
+              this.successful = false;
+            }
+          );
+        }
+      });
+    }
   }
-}
+};
 </script>
 
 <style scoped>
