@@ -1,13 +1,11 @@
 <template>
-  <div class="container">
+  <table class="table table-horizontal table-bordered">
     <thead class="thead-strong">
       <tr>
         <th>제목</th>
         <th>작성자</th>
         <th>최종수정일</th>
       </tr>
-
-      <h3>{{content}}</h3>
     </thead>
     <tbody id="tbody">
       <tr v-for="postData in datas" :key="postData.id">
@@ -16,7 +14,7 @@
           <td>{{postData.modifiedDate}}</td>
       </tr>
     </tbody>
-  </div>
+  </table>
 </template>
 
 <script>
@@ -44,3 +42,24 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+.space {
+  padding: 20px;
+}
+</style>
