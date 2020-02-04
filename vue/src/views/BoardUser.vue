@@ -1,8 +1,21 @@
 <template>
   <div class="container">
-    <header class="jumbotron">
+    <thead class="thead-strong">
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>최종수정일</th>
+      </tr>
+
       <h3>{{content}}</h3>
-    </header>
+    </thead>
+    <tbody id="tbody">
+      <tr v-for="postData in datas" :key="postData.id">
+          <td>{{postData.title}}</td>
+          <td>{{postData.author}}</td>
+          <td>{{postData.modifiedDate}}</td>
+      </tr>
+    </tbody>
   </div>
 </template>
 
@@ -13,16 +26,16 @@ export default {
   name: 'User',
   data() {
     return {
-      content: ''
+      datas: ''
     };
   },
-  mounted() {
+  mounted() { //window.onload와 비슷한 느낌..
     UserService.getUserBoard().then(
       response => {
-        this.content = response.data;
+        this.datas = response.data;
       },
       error => {
-        this.content =
+        this.datas =
           (error.response && error.response.data) ||
           error.message ||
           error.toString();

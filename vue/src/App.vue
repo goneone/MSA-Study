@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  computed: {
+  computed: { //computed == 반응형 getter
     currentUser() {
       return this.$store.state.auth.user;
     },
